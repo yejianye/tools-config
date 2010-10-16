@@ -1,8 +1,17 @@
-#/bin/sh
+#!/bin/sh
+git submodule init
+git submodule update
 
-set $cfg_dir = `pwd`
+# update vim-setup
+cd .vim
+git submodule init
+git submodule update
+
+# setup symbolic links
+set cfg_dir=`pwd`
 
 cd ~
+ln -s $cfg_dir/.vim
 ln -s $cfg_dir/.vim/.vimrc_common
 ln -s $cfg_dir/.zshrc_common
 ln -s $cfg_dir/.ctags
