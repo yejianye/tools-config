@@ -8,7 +8,6 @@ fi
 
 # ls commands
 alias ll='ls -l'
-alias ls='ls --color'
 function lsd(){ll -d $* | grep '^d'}
 
 #perl commands
