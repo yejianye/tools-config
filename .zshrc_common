@@ -13,7 +13,7 @@ function lsd(){ll -d $* | grep '^d'}
 #perl commands
 alias ped="perl -ni"
 alias psed="perl -p"
-alias pgrep="grep -P"
+#alias pgrep="grep -P"
 alias psh="perl -d -e 1"
 
 #text manipulate
