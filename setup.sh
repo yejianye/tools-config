@@ -5,6 +5,7 @@ export cfg_dir=`pwd`
 
 # update vim-setup
 cd .vim
+git checkout master
 git submodule init
 git submodule update
 
