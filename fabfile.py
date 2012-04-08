@@ -1,11 +1,6 @@
 from fabric.api import local, exist, contains, settings, require, run, sudo
 import os
 
-script_dir = os.path.dirname(__file__)
-home_dir = os.getenv('HOME')
-install_package_command = None
-caches = {}
-
 # util functions
 def ensure_link(target, source):
 	if exists(target):
@@ -73,6 +68,7 @@ def ensure_file(name, append=None):
 
 # public apis
 def ssh_localhost():
+	home_dir = os.getenv('HOME')
 	local('mkdir -p ~/.ssh')
 	if not os.path.exists(home_dir + '/.ssh/id_rsa'):
 		local("ssh-keygen -t rsa -N'' ~/.ssh/id_rsa")
