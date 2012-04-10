@@ -1,5 +1,5 @@
 from fabric.api import local, settings, run, sudo, cd, task
-from fabric.contrib.files import exists
+from fabric.contrib.files import exists, upload_template
 import sys, os
 sys.path.append(os.path.dirname(__file__))
 from fabutils import *
@@ -68,6 +68,10 @@ def watcher():
 	ensure_bin_path('~/watcher')
 	if not exists('~/.watcher.ini'):
 		run('cp ~/watcher/watcher.ini ~/.watcher.ini')
+
+@task
+def gitconfig(name='Ryan Ye', email='yejianye@gmail.com'):
+	upload_template('gitconfig', '.gitconfig', context={'name': name, 'email' : email})	
 
 @task
 def screen():
