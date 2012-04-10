@@ -56,9 +56,18 @@ def zsh():
 	ensure_package('zsh')
 	ensure_link('.zshrc_common', 'configs/.zshrc_common')
 	ensure_file('.zshrc', append='source ~/.zshrc_common')
-	ensure_file('.zshenv', append=['setopt ALL_EXPORT', 'path=( . ~/bin ~/localbin $path)'])
-	ensure_git_repo('~/bin', 'git://github.com/yejianye/util-scripts.git', pushurl='git@github.com:yejianye/util-scripts.git')
-	ensure_dir('~/localbin')
+	ensure_file('.zshenv', append=['setopt ALL_EXPORT'])
+	ensure_dir('~/bin')
+	ensure_git_repo('~/utils', 'git://github.com/yejianye/util-scripts.git', pushurl='git@github.com:yejianye/util-scripts.git')
+	ensure_bin_path(['.', '~/bin', '~/utils'])
+
+@task
+def watcher():
+	ensure_python_pkg('pyinotify')
+	ensure_git_repo('~/watcher', 'git://git://github.com/splitbrain/Watcher.git')
+	ensure_bin_path('~/watcher')
+	if not exists('~/.watcher.ini'):
+		run('cp ~/watcher/watcher.ini ~/.watcher.ini')
 
 @task
 def screen():
@@ -96,4 +105,4 @@ def all():
 
 @task
 def test():
-	ensure_link('.vimrc_common', '~/.vim/.vimrc_common')
+	ensure_bin_path(['.', '~/bin', '~/utils', '~/localbin'])

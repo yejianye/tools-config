@@ -1,5 +1,5 @@
 from fabric.api import local, settings, require, run, sudo, env, cd, hide
-from fabric.contrib.files import exists, append
+from fabric.contrib.files import exists, append, sed
 import os
 
 # util functions
@@ -79,3 +79,15 @@ def ensure_file(name, **kwargs):
 			lines = lines.split('\n')
 		append(name, lines)
 
+def ensure_bin_path(paths):
+	if not isinstance(paths, list):
+		paths = [paths]
+	with cd('~'):
+		with settings(hide('running', 'warnings', 'stdout'), warn_only=True):
+			existing = run("grep '^PATH=' .zshenv")
+		if existing.return_code:
+			append('.zshenv', 'PATH=%s:$PATH' % ':'.join(paths))
+		else:
+			existing = existing.split('=')[1].split(':')
+			paths = paths + [p for p in existing if p not in paths]
+			sed('.zshenv', '^PATH=.*', 'PATH=' + ':'.join(paths), backup='')
