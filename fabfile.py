@@ -64,7 +64,7 @@ def zsh():
 @task
 def watcher():
 	ensure_python_pkg('pyinotify')
-	ensure_git_repo('~/watcher', 'git://git://github.com/splitbrain/Watcher.git')
+	ensure_git_repo('~/watcher', 'git://github.com/splitbrain/Watcher.git')
 	ensure_bin_path('~/watcher')
 	if not exists('~/.watcher.ini'):
 		run('cp ~/watcher/watcher.ini ~/.watcher.ini')
