@@ -6,7 +6,7 @@ import os
 def ensure_link(target, source):
 	if exists(target):
 		run('rm -rf ' +  target)
-	run('ln -s %s %s' % (source, target))
+	run('ln -sf %s %s' % (source, target))
 
 def ensure_dir(directory):
 	if not exists(directory):
