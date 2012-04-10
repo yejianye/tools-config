@@ -63,7 +63,10 @@ def ensure_package(name):
 
 def ensure_python_pkg(name):
 	if not program_exists('pip'):
-		sudo('easy_install pip')
+		if program_exists('easy_install'):
+			sudo('easy_install pip')
+		else:
+			ensure_package('python-pip')
 	sudo('pip install %s' % name)
 
 def ensure_file(name, **kwargs):
