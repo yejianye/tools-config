@@ -7,6 +7,7 @@ else
 fi
 
 # ls commands
+alias ls='ls --color'
 alias ll='ls -l'
 function lsd(){ll -d $* | grep '^d'}
 
