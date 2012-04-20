@@ -1,7 +1,6 @@
 from fabric.api import local, settings, run, sudo, cd, task
 from fabric.contrib.files import exists, upload_template
 import sys, os
-sys.path.append(os.path.dirname(__file__))
 from fabutils import *
 
 env.use_ssh_config = True
