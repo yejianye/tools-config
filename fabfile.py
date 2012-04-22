@@ -1,7 +1,10 @@
-from fabric.api import local, settings, run, sudo, cd, task
+from fabric.api import env, local, settings, run, sudo, cd, task
 from fabric.contrib.files import exists, upload_template
 import sys, os
-from fabutils import *
+from fabtask.files import ensure_link, ensure_file, ensure_dir, ensure_bin_path
+from fabtask.utils import is_macos, is_linux
+from fabtask.packages import ensure_package, ensure_python_pkg
+from fabtask.vcs import ensure_git_repo
 
 env.use_ssh_config = True
 
