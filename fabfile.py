@@ -93,7 +93,8 @@ def python():
 		'ipython', 
 		'ipdb',
 		'pylint',
-		'fabric'
+		'fabric',
+		'requests'
 	]
 	[ensure_python_pkg(pkg) for pkg in pkgs]
 
