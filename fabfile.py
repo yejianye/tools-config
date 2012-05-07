@@ -1,12 +1,31 @@
 from fabric.api import env, local, settings, run, sudo, cd, task
 from fabric.contrib.files import exists, upload_template
 import sys, os
-from fabtask.files import ensure_link, ensure_file, ensure_dir, ensure_bin_path
-from fabtask.utils import is_macos, is_linux
-from fabtask.packages import ensure_package, ensure_python_pkg
-from fabtask.vcs import ensure_git_repo
+try:
+	from fabtask.files import ensure_link, ensure_file, ensure_dir, ensure_bin_path
+	from fabtask.utils import is_macos, is_linux
+	from fabtask.packages import ensure_package, ensure_python_pkg
+	from fabtask.vcs import ensure_git_repo
+except ImportError:
+	print "Fabtask package not found. Please run 'fab fabtask' to install it"
 
 env.use_ssh_config = True
+
+@task
+def fabtask(source=False, path='.'):
+	with settings(warn_only=True):
+		pip = local('which pip', capture=True)
+	if not pip.succeeded:
+		local('sudo easy_install pip')
+	with settings(warn_only=True):
+		git = local('which git', capture=True)
+	if not git.succeeded:
+		local('sudo apt-get install git')
+	if source:
+		with cd(path):
+			local('git clone git://github.com/yejianye/fabtask.git')
+	else:
+		local('sudo pip install git+git://github.com/yejianye/fabtask.git')
 
 @task
 def ssh_localhost():
