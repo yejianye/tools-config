@@ -37,6 +37,8 @@ def ssh_localhost():
 
 @task
 def install_vim73():
+	ensure_package('gcc')
+	ensure_package('libncurses5-dev')
 	if not exists('/tmp/vim73'):
 		ensure_package('wget')
 		with(cd('/tmp')):
