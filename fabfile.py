@@ -77,6 +77,7 @@ def vim():
 @task
 def zsh():
 	ensure_package('zsh')
+	ensure_git_repo('~/.oh-my-zsh', 'git://github.com/yejianye/oh-my-zsh.git', pushurl='git@github.com:yejianye/oh-my-zsh.git')
 	ensure_link('.zshrc_common', 'configs/.zshrc_common')
 	ensure_file('.zshrc', append='source ~/.zshrc_common')
 	ensure_file('.zshenv', append=['setopt ALL_EXPORT'])
