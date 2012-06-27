@@ -1,7 +1,7 @@
 # This is how one can set a reattach password:
 # password ODSJQf.4IJN7E    # "1234"
 
-shell /nail/home/rye/apps/bin/zsh
+#shell /nail/home/rye/apps/bin/zsh
 
 # no annoying audible bell, please
 vbell off
