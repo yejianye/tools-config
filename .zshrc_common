@@ -1,6 +1,7 @@
 ZSH=$HOME/.oh-my-zsh
 MODE_INDICATOR="-- NORMAL --"
 ZSH_THEME="templar"
+DISABLE_AUTO_UPDATE="true"
 
 plugins=(vi-mode)
 
