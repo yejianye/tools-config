@@ -37,7 +37,15 @@ function git_track_branch() {
 }
 
 function get_git_branch(){
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+function git_hash_by_date {
+	git rev-list -n 1 --before="$1" master
+}
+
+function git_checkout_by_date {
+	git checkout `git_hash_by_date $1`
 }
 
 alias gc="git checkout"
@@ -46,3 +54,4 @@ alias gs="git status"
 alias gp='git pull'
 alias gps='git push origin `get_git_branch`'
 alias gt='git_track_branch'
+alias gcdate='git_checkout_by_date'
