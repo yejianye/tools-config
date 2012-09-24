@@ -104,7 +104,10 @@ def screen():
 
 @task
 def ctags():
-	ensure_package('ctags')
+	if is_macos():
+		ensure_package('ctags', '--HEAD')  # Ensure to get Ctags trunk for Objective-C support
+	else:
+		ensure_package('ctags')
 	ensure_link('.ctags', 'configs/.ctags')
 
 @task
