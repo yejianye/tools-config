@@ -103,6 +103,11 @@ def screen():
 	ensure_link('.screenrc', 'configs/.screenrc')
 
 @task
+def tmux():
+	ensure_package('tmux')
+	ensure_link('.tmux.conf', 'configs/.tmux.conf')
+
+@task
 def ctags():
 	if is_macos():
 		ensure_package('ctags', '--HEAD')  # Ensure to get Ctags trunk for Objective-C support
@@ -130,7 +135,8 @@ def all():
 	dotrepo()
 	zsh()
 	vim()
-	screen()
+	#screen()
+	tmux()
 	ctags()
 	terminfo()
 	python()
