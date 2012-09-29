@@ -55,3 +55,5 @@ alias gp='git pull'
 alias gps='git push origin `get_git_branch`'
 alias gt='git_track_branch'
 alias gcdate='git_checkout_by_date'
+
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
