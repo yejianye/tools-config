@@ -65,8 +65,6 @@ def vim():
 	with(cd('~/.vim/bundle/vimproc')):
 		run('make -f make_gcc.mak')
 	# setup pushurl for submodules
-	with(cd('~/.vim/bundle/snipMate')):
-		run('git config remote.origin.pushurl git@github.com:yejianye/snipmate.vim.git')
 	with(cd('~/.vim/bundle/textobj_function')):	
 		run('git config remote.origin.pushurl git@github.com:yejianye/vim-textobj-function.git')
 	with(cd('~/.vim/bundle/vim-ref-jquery')):
