@@ -1,5 +1,5 @@
 from fabric.api import env, local, settings, run, sudo, cd, task
-from fabric.contrib.files import exists, upload_template
+from fabric.contrib.files import exists, upload_template, sed
 import sys, os
 try:
 	from fabtask.files import ensure_link, ensure_file, ensure_dir, ensure_bin_path
@@ -107,6 +107,10 @@ def screen():
 def tmux():
 	ensure_package('tmux')
 	ensure_link('.tmux.conf', 'configs/.tmux.conf')
+	if is_macos():
+		ensure_link('.tmux.platform.conf', 'configs/.tmux.mac.conf')
+	else:
+		ensure_file('.tmux.platform.conf')
 
 @task
 def ctags():
@@ -130,6 +134,21 @@ def python():
 		'requests'
 	]
 	[ensure_python_pkg(pkg) for pkg in pkgs]
+
+@task
+def wordpress_nginx():
+	if not is_linux():
+		print 'This task is only supported on linux' 
+	# install LEMP (nginx + mysql + php)
+	pkgs = ['mysql-server', 'mysql-client', 'nginx', 'php5', 'php5-fpm', 'php5-mysql', 'wordpress']
+	#[ensure_package(pkg) for pkg in pkgs]
+	sed('/etc/php5/fpm/php.ini', '^;? *cgi.fix_pathinfo *= *1', 'cgi.fix_pathinfo=0', use_sudo=True)
+	upload_template('wp_blog', '/etc/nginx/sites-available/wp_blog', use_sudo=True,
+		context={'server_name' : '113.11.199.44'})	
+	with cd('/etc/nginx/sites-enabled/'):
+		sudo('ln -sf ../sites-available/wp_blog')
+	sudo('service nginx restart')
+	sudo('bash /usr/share/doc/wordpress/examples/setup-mysql -n wordpress localhost')
 
 @task
 def all():
