@@ -63,7 +63,10 @@ def vim():
 		ensure_package('gcc')
 		ensure_package('make')
 	with(cd('~/.vim/bundle/vimproc')):
-		run('make -f make_gcc.mak')
+		if is_macos():
+			run('make -f make_mac.mak')
+		elif is_linux():
+			run('make -f make_unix.mak')
 	# setup pushurl for submodules
 	with(cd('~/.vim/bundle/textobj_function')):	
 		run('git config remote.origin.pushurl git@github.com:yejianye/vim-textobj-function.git')
