@@ -72,8 +72,6 @@ def vim():
 		run('git config remote.origin.pushurl git@github.com:yejianye/vim-textobj-function.git')
 	with(cd('~/.vim/bundle/vim-ref-jquery')):
 		run('git config remote.origin.pushurl git@github.com:yejianye/vim-ref-jquery.git')
-	with(cd('~/.vim/bundle/jshint')):
-		run('git config remote.origin.pushurl git@github.com:yejianye/jshint.vim.git')
 
 @task
 def zsh():
