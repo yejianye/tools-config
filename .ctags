@@ -13,3 +13,10 @@
 --regex-actionscript=/^[ \t]*[(private|public|static|protected) ( \t)]*var[ \t]+([A-Za-z0-9_]+)[ \t]*/\1/v,variable, variables/
 --regex-actionscript=/.*\.prototype \.([A-Za-z0-9 ]+)=([ \t]?)function( [ \t]?)*\(/\1/ f,function, functions/
 --regex-actionscript=/^[ \t]*class[ \t]+([A-Za-z0-9_]+)[ \t]*/\1/c,class, classes/
+--langdef=coffee
+--langmap=coffee:.coffee
+--regex-coffee=/^[ \t]*class[ \t]+([A-Za-z.@]+)/\1/,class/
+--regex-coffee=/^[ \t]*([A-Za-z.]+)[ \t]*\:.*(->|=>).*$/\1/,method/
+--regex-coffee=/^[ \t]*(@[A-Za-z.]+)[ \t]*\:.*(->|=>).*$/\1/,staticmethod/
+--regex-coffee=/^[ \t]*([A-Za-z.]+)[ \t]*=.*(->|=>).*$/\1/,function/
+--regex-coffee=/^[ \t]*([A-Z0-9_]+)[ \t]*=.*$/\1/,constant/
