@@ -58,3 +58,15 @@ alias gt='git_track_branch'
 alias gcdate='git_checkout_by_date'
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
+# enable ctrl+s 
+stty -ixon
+
+# simple http server
+function httpserver {
+    if [ -n "$1" ]; then
+        python -m SimpleHTTPServer $1
+    else
+        python -m SimpleHTTPServer 8000
+    fi
+}
